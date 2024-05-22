@@ -21,6 +21,7 @@ class AuthTest extends TestCase
 
         $this->browse(static fn (Browser $browser) => $browser
             ->loginAs($user, 'web')
+            ->pause(10000)
             ->assertAuthenticatedAs($user, 'web')
         );
     }

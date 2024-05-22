@@ -40,3 +40,5 @@ jobs:
 
       - name: Run Tests
         run: composer run test
+        env:
+          TEST_KEY: 'test-env'

@@ -19,6 +19,8 @@ class AuthTest extends TestCase
     {
         $user = UserFactory::new()->create();
 
+        $this->assertEquals('test-env', env('TEST_KEY'));
+
         $this->browse(static fn (Browser $browser) => $browser
             ->loginAs($user, 'web')
             ->pause(10000)

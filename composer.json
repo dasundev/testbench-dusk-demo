@@ -11,5 +11,24 @@
     "require-dev": {
         "phpunit/phpunit": "^10.1",
         "orchestra/testbench-dusk": "^8.25"
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit",
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare",
+            "@dusk:install-chromedriver",
+            "@package:create-sqlite-db"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "dusk:install-chromedriver": "@php vendor/bin/dusk-updater detect --auto-update --ansi",
+        "package:create-sqlite-db": "@php vendor/bin/testbench-dusk package:create-sqlite-db --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve"
+        ]
     }
 }
